@@ -1,0 +1,5 @@
+const reviewsList = document.getElementById("reviews-list");
+reviewsList.insertAdjacentHTML('beforeend', `<p><%= j @review.content %></p>`);
+
+const form = document.querySelector("form");
+form.reset();

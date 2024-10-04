@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Book List</h1>
+
+      <%= search_form_for @q, url: root_path, method: :get, html: { id: "search-form" } do |f| %>
+        <div class="input-group">
+          <%= f.search_field :title_cont, class: "form-control", id: "search-input", placeholder: "Enter book title" %>
+        </div>
+      <% end %>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Published Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="book-list">
+          <% @books.each do |book| %>
+            <tr>
+              <td><%= book.title %></td>
+              <td><%= book.author %></td>
+              <td><%= book.genre %></td>
+              <td><%= book.published_date.strftime('%d %b, %Y') %></td>
+              <td><%= link_to 'Show more', book_path(book) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'search_books' %>

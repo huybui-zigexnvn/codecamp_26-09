@@ -1,0 +1,24 @@
+<h1><%= @book.title %></h1>
+
+<div id="reviews-list">
+  <% @book.reviews.each do |review| %>
+    <p><%= review.content %></p>
+  <% end %>
+</div>
+
+<%= form_with(model: [@book, @book.reviews.build], local: false, data: { turbo: false }) do |form| %>
+  <div>
+    <%= form.label :content %><br>
+    <%= form.text_area :content %>
+  </div>
+
+  <div>
+    <%= form.submit "Add Review" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    subscribeToBookReviews(<%= @book.id %>);
+  });
+</script>
